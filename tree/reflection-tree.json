@@ -1,0 +1,234 @@
+{
+  "nodes": [
+
+    { "id": "START", "type": "start", "text": "Good evening. Let's take a few minutes to reflect on your day.", "next": "A1_Q1" },
+
+    {
+      "id": "A1_Q1",
+      "type": "question",
+      "text": "How would you describe your day overall?",
+      "options": [
+        {"text": "Productive", "target": "A1_D1"},
+        {"text": "Mixed", "target": "A1_D1"},
+        {"text": "Tough", "target": "A1_D1"},
+        {"text": "Frustrating", "target": "A1_D1"},
+        {"text": "Draining", "target": "A1_D1"}
+      ]
+    },
+
+    {
+      "id": "A1_D1",
+      "type": "decision",
+      "basedOn": "A1_Q1",
+      "map": {
+        "Productive": "A1_Q2_INT",
+        "Mixed": "A1_Q2_INT",
+        "Tough": "A1_Q2_EXT",
+        "Frustrating": "A1_Q2_EXT",
+        "Draining": "A1_Q2_EXT"
+      }
+    },
+
+    {
+      "id": "A1_Q2_INT",
+      "type": "question",
+      "text": "You said \"{A1_Q1.answer}\". What helped things go well?",
+      "options": [
+        {"text": "I planned and executed well", "target": "A1_Q3", "signal": "axis1:internal"},
+        {"text": "The team supported me", "target": "A1_Q3", "signal": "axis1:external"},
+        {"text": "Some things fell into place", "target": "A1_Q3", "signal": "axis1:external"},
+        {"text": "I adapted along the way", "target": "A1_Q3", "signal": "axis1:internal"}
+      ]
+    },
+
+    {
+      "id": "A1_Q2_EXT",
+      "type": "question",
+      "text": "You said \"{A1_Q1.answer}\". When things got difficult, what did you do?",
+      "options": [
+        {"text": "Tried to control what I could", "target": "A1_Q3", "signal": "axis1:internal"},
+        {"text": "Waited for others", "target": "A1_Q3", "signal": "axis1:external"},
+        {"text": "Felt stuck", "target": "A1_Q3", "signal": "axis1:external"},
+        {"text": "Adjusted my approach", "target": "A1_Q3", "signal": "axis1:internal"}
+      ]
+    },
+
+    {
+      "id": "A1_Q3",
+      "type": "question",
+      "text": "What best describes your role in today's outcomes?",
+      "options": [
+        {"text": "I played an active role in shaping outcomes", "target": "A1_D2", "signal": "axis1:internal"},
+        {"text": "I adapted when needed", "target": "A1_D2", "signal": "axis1:internal"},
+        {"text": "Things mostly happened to me", "target": "A1_D2", "signal": "axis1:external"},
+        {"text": "Others determined outcomes", "target": "A1_D2", "signal": "axis1:external"}
+      ]
+    },
+
+    {
+      "id": "A1_D2",
+      "type": "decision",
+      "axis": "axis1",
+      "internal": "A1_R_INT",
+      "external": "A1_R_EXT"
+    },
+
+    {
+      "id": "A1_R_INT",
+      "type": "reflection",
+      "text": "You stayed engaged with what you could influence today. Even when things shifted, you adjusted your approach — that's a quiet form of agency that often goes unnoticed.",
+      "next": "BRIDGE_1_2"
+    },
+
+    {
+      "id": "A1_R_EXT",
+      "type": "reflection",
+      "text": "Today may have felt shaped by external factors. That's real. Still, within those moments, your responses carried weight — noticing those small choices can change how days like this unfold.",
+      "next": "BRIDGE_1_2"
+    },
+
+    {
+      "id": "BRIDGE_1_2",
+      "type": "bridge",
+      "text": "Earlier you reflected on how you handled situations. Now let's look at what you contributed within them.",
+      "next": "A2_Q1"
+    },
+
+    {
+      "id": "A2_Q1",
+      "type": "question",
+      "text": "Which best describes your interactions today?",
+      "options": [
+        {"text": "Helped someone beyond my role", "target": "A2_Q2", "signal": "axis2:contribution"},
+        {"text": "Focused on my tasks", "target": "A2_Q2"},
+        {"text": "Felt I deserved more credit", "target": "A2_Q2", "signal": "axis2:entitlement"},
+        {"text": "Supported team effort", "target": "A2_Q2", "signal": "axis2:contribution"}
+      ]
+    },
+
+    {
+      "id": "A2_Q2",
+      "type": "question",
+      "text": "How did you approach your work?",
+      "options": [
+        {"text": "Looked for ways to add value", "target": "A2_Q3", "signal": "axis2:contribution"},
+        {"text": "Focused on completing assigned work", "target": "A2_Q3"},
+        {"text": "Expected recognition", "target": "A2_Q3", "signal": "axis2:entitlement"},
+        {"text": "Avoided extra effort", "target": "A2_Q3", "signal": "axis2:entitlement"}
+      ]
+    },
+
+    {
+      "id": "A2_Q3",
+      "type": "question",
+      "text": "A moment from today stands out:",
+      "options": [
+        {"text": "I contributed beyond expectations", "target": "A2_D1", "signal": "axis2:contribution"},
+        {"text": "I stayed within my defined responsibilities", "target": "A2_D1"},
+        {"text": "I felt overlooked", "target": "A2_D1", "signal": "axis2:entitlement"},
+        {"text": "I waited for direction", "target": "A2_D1", "signal": "axis2:entitlement"}
+      ]
+    },
+
+    {
+      "id": "A2_D1",
+      "type": "decision",
+      "axis": "axis2",
+      "contribution": "A2_R_CONTR",
+      "entitlement": "A2_R_ENT"
+    },
+
+    {
+      "id": "A2_R_CONTR",
+      "type": "reflection",
+      "text": "You mentioned \"{A2_Q1.answer}\" earlier — that reflects a tendency toward contribution. These actions are often subtle, but they’re what move teams forward.",
+      "next": "BRIDGE_2_3"
+    },
+
+    {
+      "id": "A2_R_ENT",
+      "type": "reflection",
+      "text": "You mentioned \"{A2_Q1.answer}\" — moments like these often highlight expectations more than contributions. That’s not unusual, but noticing it clearly is what allows it to shift over time.",
+      "next": "BRIDGE_2_3"
+    },
+
+    {
+      "id": "BRIDGE_2_3",
+      "type": "bridge",
+      "text": "So far you've looked at your actions and contributions. Now let's widen the lens — beyond yourself to others.",
+      "next": "A3_Q1"
+    },
+
+    {
+      "id": "A3_Q1",
+      "type": "question",
+      "text": "When you think about your day, what stands out most?",
+      "options": [
+        {"text": "My workload", "target": "A3_Q2", "signal": "axis3:self"},
+        {"text": "Team progress", "target": "A3_Q2", "signal": "axis3:altrocentric"},
+        {"text": "Someone I helped", "target": "A3_Q2", "signal": "axis3:altrocentric"},
+        {"text": "Customer impact", "target": "A3_Q2", "signal": "axis3:altrocentric"}
+      ]
+    },
+
+    {
+      "id": "A3_Q2",
+      "type": "question",
+      "text": "Your biggest concern today was:",
+      "options": [
+        {"text": "My stress", "target": "A3_Q3", "signal": "axis3:self"},
+        {"text": "Team deadlines", "target": "A3_Q3", "signal": "axis3:altrocentric"},
+        {"text": "Someone struggling", "target": "A3_Q3", "signal": "axis3:altrocentric"},
+        {"text": "User experience", "target": "A3_Q3", "signal": "axis3:altrocentric"}
+      ]
+    },
+
+    {
+      "id": "A3_Q3",
+      "type": "question",
+      "text": "What mattered most today?",
+      "options": [
+        {"text": "My performance", "target": "A3_D1", "signal": "axis3:self"},
+        {"text": "Team success", "target": "A3_D1", "signal": "axis3:altrocentric"},
+        {"text": "Helping others grow", "target": "A3_D1", "signal": "axis3:altrocentric"},
+        {"text": "Delivering value", "target": "A3_D1", "signal": "axis3:altrocentric"}
+      ]
+    },
+
+    {
+      "id": "A3_D1",
+      "type": "decision",
+      "axis": "axis3",
+      "altrocentric": "A3_R_ALTRO",
+      "self": "A3_R_SELF"
+    },
+
+    {
+      "id": "A3_R_ALTRO",
+      "type": "reflection",
+      "text": "You expanded your focus beyond yourself today. That broader perspective often brings clarity — it connects daily work to something larger.",
+      "next": "SUMMARY"
+    },
+
+    {
+      "id": "A3_R_SELF",
+      "type": "reflection",
+      "text": "Today felt centered around your own responsibilities. That’s natural — and sometimes necessary. But occasionally widening that lens can reveal new meaning in familiar work.",
+      "next": "SUMMARY"
+    },
+
+    {
+      "id": "SUMMARY",
+      "type": "summary",
+      "text": "Today, your responses suggest a tilt toward {axis1.dominant} agency, {axis2.dominant} contribution, and a {axis3.dominant} focus. These patterns tend to shape how days like this unfold.",
+      "next": "END"
+    },
+
+    {
+      "id": "END",
+      "type": "end",
+      "text": "That's it for today. See you tomorrow."
+    }
+
+  ]
+}
